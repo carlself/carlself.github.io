@@ -1,222 +1,89 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-
-  
+<!DOCTYPE HTML>
+<html>
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
-  <meta name="author" content="董沅鑫, yuanxin.me@gmail.com">
-  
-  
   
   <title>FPSSample分析 | Hexo</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
   
-    <meta name="keywords" content="Unity,FPSSample,">
-  
-
-  <script>
-    console.log('\n%c Hexo-theme-bmw v4.0 ' + '%c 🎉 https://github.com/dongyuanxin/theme-bmw 🎉\n' + '\n%c View demo online ' + '%c 🔍 https://godbmw.com/ 🔍  \n' , 'color: #fadfa3; background: #030307; padding:3px 0;', '', 'color: #fadfa3; background: #030307; padding:3px 0;', '');
-  </script>
-
+  <meta name="author" content="John Doe">
   
 
   
-
-  
-    <link rel="icon" href="/images/favicon.ico">
-    <link rel="apple-touch-icon" href="/images/touch-icon.png">
-  
-
-  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/icon/iconfont.css">
-<link rel="stylesheet" href="/css/github-markdown.css">
-<link rel="stylesheet" href="/css/highlight.css">
-
-  <script src="/js/util.js"></script>
-<script src="/js/valine.min.js"></script>
-
+  <meta name="description" content="在FPSSample项目之前Unity官方出的示例都只是展示某一项技术，没有真正完整的大型项目。要做出真正易用的引擎，引擎开发商要使用自己的引擎做实际的项目，然后根据开发体验改进引擎，这样才会不断提高引擎的易用性，厨师要吃自己做的菜才能成为好厨师。很高兴看到Unity官方能做出FPSSample这样">
   
 
   
-    <link href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
-    <script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js" async></script>
+  
+  <meta name="keywords" content="Unity,FPSSample">
   
 
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="FPSSample分析">
+
+  <meta property="og:site_name" content="Hexo">
+
   
-    <link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
-  
-  
-  <script src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js" async></script>
-  
-  
-    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.0/dist/av-min.js"></script>
+  <meta property="og:image" content="/favicon.ico">
   
 
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
 </head>
 
-  <body>
 
-    
+<body>
+<div class="blog">
+  <div class="content">
 
-    <div id="app">
-
-      <div class="header-wrap">
-  <header>
-    <div class="site-brand">
-      <div class="site-title">
-        <a href="/">GODBMW.com</a>
-      </div>
-    </div>
-    <nav class="site-navigation">
-      <ul class="nav-menu">
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Hexo</a>
+    </h1>
+    <p class="site-description"></p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
       
-        <li class="nav-item" data-path="/">
-          
-            <a href="/" target="_self">
-              主页
-            </a>
-          
-        </li>
+        <li><a href="/">Home</a></li>
       
-        <li class="nav-item" data-path="/archives/">
-          
-            <a href="/archives/" target="_self">
-              归档
-            </a>
-          
-        </li>
+        <li><a href="/archives">Archives</a></li>
       
-        <li class="nav-item" data-path="/categories/">
-          
-            <a href="/categories/" target="_self">
-              分类
-            </a>
-          
-        </li>
-      
-        <li class="nav-item" data-path="/tags/">
-          
-            <a href="/tags/" target="_self">
-              标签
-            </a>
-          
-        </li>
-      
-        <li class="nav-item" data-path="/friends/">
-          
-            <a href="/friends/" target="_self">
-              友链
-            </a>
-          
-        </li>
-      
-        <li class="nav-item" data-path="/about/">
-          
-            <a href="/about/" target="_self">
-              关于
-            </a>
-          
-        </li>
-      
-        <li class="nav-item" data-path="">
-          
-            <a href="javascript:void(0);" v-else="">抓到我</a>
-            <ul class="nav-menu--dropdown">
-              
-                <li>
-                  <a href="https://github.com/dongyuanxin" target="_blank">
-                    Github
-                  </a>
-                </li>
-              
-                <li>
-                  <a href="https://www.zhihu.com/people/godbmw/activities" target="_blank">
-                    知乎
-                  </a>
-                </li>
-              
-            </ul>
-          
-        </li>
-      
-      </ul>
-    </nav>
-    <i class="iconfont icon-menu"></i>
-  </header>
-</div>
+    </ul>
+  </nav>
+</header>
 
-<script>
-  let links = document.querySelectorAll('.nav-item');
-  for(let link of links){
-    let childrenLink = link.querySelector('ul');
-    link.addEventListener('mouseenter', () => {
-      if(childrenLink) {
-        childrenLink.className = "nav-menu--dropdown active";
-      }
-    })
-    link.addEventListener('mouseleave', () => {
-      if(childrenLink) {
-        childrenLink.className = "nav-menu--dropdown";
-      }
-    })
-  }
-  let rootRealPath = getRealPath(window.location.pathname, true);
-  for(let link of links) {
-    let linkPath = link.getAttribute("data-path");
-    if(linkPath && getRealPath(linkPath, true) === rootRealPath) {
-      link.className = "nav-item hover";
-    }
-  }
-
-  let iconMenu = document.querySelector("i.iconfont.icon-menu"),
-    iconMenuClicked = false;
-  let navDOM = document.querySelector("nav.site-navigation");
-  iconMenu.addEventListener("click", () => {
-    iconMenuClicked 
-      ? navDOM.className = "site-navigation active"
-      : navDOM.className = "site-navigation";
-    iconMenuClicked = !iconMenuClicked;
-  })
-</script>
-
-      
-
-
-
-
-
-
-
-
-<div class="container post-index">
+    <main class="site-main posts-loop">
+    <article>
 
   
+    
+    <h3 class="article-title"><span>FPSSample分析</span></h3>
+    
+  
 
-<div class="post">
-  <h1 class="article-title">
-    <span>FPSSample分析</span>
-  </h1>
   <div class="article-top-meta">
-    <span>
-      发布 : 
-      2018-12-30
+    <span class="posted-on">
+      <a href="/2018/12/30/FPSSample分析/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-12-29T18:18:15.000Z">
+          2018-12-30
+        </time>
+      </a>
     </span>
-    
-    
-      <span>
-        浏览 : <span class="article-timer" data-identity="FPSSample分析"></span>
-      </span>
-    
   </div>
+
 
   
 
   <div class="article-content">
-    <div class="markdown-body">
-      <p>在FPSSample项目之前Unity官方出的示例都只是展示某一项技术，没有真正完整的大型项目。要做出真正易用的引擎，引擎开发商要使用自己的引擎做实际的项目，然后根据开发体验改进引擎，这样才会不断提高引擎的易用性，厨师要吃自己做的菜才能成为好厨师。很高兴看到Unity官方能做出FPSSample这样的项目，这代表了Unity态度的转变，事情在往好的方向发展。</p>
+    <div class="entry">
+      
+        <p>在FPSSample项目之前Unity官方出的示例都只是展示某一项技术，没有真正完整的大型项目。要做出真正易用的引擎，引擎开发商要使用自己的引擎做实际的项目，然后根据开发体验改进引擎，这样才会不断提高引擎的易用性，厨师要吃自己做的菜才能成为好厨师。很高兴看到Unity官方能做出FPSSample这样的项目，这代表了Unity态度的转变，事情在往好的方向发展。</p>
 <p>FPSSample的Github地址是<a href="https://github.com/Unity-Technologies/FPSSample" target="_blank" rel="noopener">https://github.com/Unity-Technologies/FPSSample</a>，这是一个包括了服务器和客户端的多人射击游戏，这篇文章主要分析资源管理，网络传输和同步。</p>
 <h2 id="总体分析"><a href="#总体分析" class="headerlink" title="总体分析"></a>总体分析</h2><p>在阅读代码前需要先了解一下ECS，可以参考这个<a href="https://unity3d.com/learn/tutorials/topics/scripting/introduction-ecs" target="_blank" rel="noopener">教程</a>。项目里所用到的ECS知识点较为简单，这里简单介绍一下。ECS是一种以数据为中心的编程范式，它分离了数据和行为，包含三个要素：实体(Entity)，组件(Component)和系统(System)，其中Entity是用来引用Component的，Component只包含了纯数据，System首先过滤要操作的Component然后定义行为。下面举例说明项目中怎么使用ECS的。</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Component需要是struct，并且实现IComponentData接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">struct</span> Foo : IComponentData</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> <span class="keyword">value</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">struct</span> Bar : IComponentData</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> <span class="keyword">value</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Entity的创建和组件添加</span></span><br><span class="line"><span class="comment">// Entity e = entityManager.CreateEntity();</span></span><br><span class="line"><span class="comment">// entityManager.AddComponentData(e, new Foo&#123;value = 0&#125;);</span></span><br><span class="line"><span class="comment">// entityManager.AddComponentData(e, new Bar&#123;value = 1&#125;);</span></span><br><span class="line"><span class="comment">// entityManager.SetComponentData(e, new Bar&#123;value = 100&#125;);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Unity提供了ComponentSystem和用于多线程的JobComponentSystem，</span></span><br><span class="line"><span class="comment">// 目前项目没有用到JobComponentSystem</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">FoobarSystem</span> : <span class="title">ComponentSystem</span></span><br><span class="line">&#123;</span><br><span class="line">    ComponentGroup <span class="keyword">group</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通过注入的方式指定过滤的Component</span></span><br><span class="line">    <span class="comment">// public struct GroupType</span></span><br><span class="line">    <span class="comment">// &#123;</span></span><br><span class="line">    <span class="comment">//    public readonly int Length;</span></span><br><span class="line">    <span class="comment">//    public ComponentDataArray&lt;Foo&gt; Foo;</span></span><br><span class="line">    <span class="comment">//    public ComponentDataArray&lt;Bar&gt; Bar;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="comment">// [Inject] GroupType group;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnCreateManager</span>(<span class="params"><span class="keyword">int</span> capacity</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">base</span>.OnCreateManager(capacity);</span><br><span class="line">        <span class="comment">// 通过API指定这个System要操作带所有同时具有Foo和Bar组件实体</span></span><br><span class="line">        <span class="comment">// 还有一种就是上面演示的那样通过[Inject]注入的方式指定</span></span><br><span class="line">        <span class="keyword">group</span> = GetComponentGroup(<span class="keyword">typeof</span>(Foo), <span class="keyword">typeof</span>(Bar));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnUpdate</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="comment">// 获取所有满足条件的Entity</span></span><br><span class="line">        EntityArray entityArray = <span class="keyword">group</span>.GetEntityArray();</span><br><span class="line">        <span class="comment">// 获取组件</span></span><br><span class="line">        ComponentDataArray fooArray = <span class="keyword">group</span>.GetComponentDataArray&lt;Foo&gt;();</span><br><span class="line">        ComponentDataArray barArray = <span class="keyword">group</span>.GetComponentDataArray&lt;Foo&gt;();</span><br><span class="line">       </span><br><span class="line">       <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; fooArray.Length; i++)</span><br><span class="line">       &#123;</span><br><span class="line">           Foo foo =  fooArray[i];</span><br><span class="line">           Bar bar = barArray[i];</span><br><span class="line">           foo.<span class="keyword">value</span> = bar.<span class="keyword">value</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 正常情况下操作组件是通过EntityManager的API实现的，</span></span><br><span class="line">            <span class="comment">// 而这里因为操作组件会破坏内部的数据结构，导致fooArray元素变化，所以使用PostUpdateCommands使操作延迟作用</span></span><br><span class="line">           <span class="comment">// 需要重新设置Entity的Foo组件数据，因为Foo是个struct</span></span><br><span class="line">           PostUpdateCommands.SetComponentData(entityArray[i], foo);</span><br><span class="line">           PostUpdateCommands.RemoveComponent&lt;Bar&gt;(entityArray[i]);</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -288,439 +155,46 @@
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 挂载这个组件的Entity表示Entity及其INetworkSerializable组件会被同步到客户端</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">struct</span> ReplicatedDataEntity : IComponentData</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> typeId; <span class="comment">// Entity的类型id，由编辑器自动分配的</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> id;     <span class="comment">// Entity id </span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> predictingPlayerId;  <span class="comment">// 正在预测这个entity的玩家id  </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 管理可同步的Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ReplicatedEntityCollection</span> : <span class="title">IEntityReferenceSerializer</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 可同步的Entity以及它上面的需要同步的组件</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">struct</span> ReplicatedData</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> Entity entity;</span><br><span class="line">        <span class="keyword">public</span> INetworkSerializable[] serializableArray;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> lastServerUpdate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加一个新的Entity和实现了INetworkSerializable的组件</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Register</span>(<span class="params"><span class="keyword">int</span> entityId, Entity entity, INetworkSerializable[] serializableArray</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="comment">// 列表扩容</span></span><br><span class="line">        <span class="keyword">if</span> (entityId &gt;= m_replicatedData.Count)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> count = entityId - m_replicatedData.Count + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">var</span> emptyData = <span class="keyword">new</span> ReplicatedData();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                m_replicatedData.Add(emptyData);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        GameDebug.Assert(m_replicatedData[entityId].entity == Entity.Null,<span class="string">"ReplicatedData has entity set:&#123;0&#125;"</span>, m_replicatedData[entityId].entity);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 按类型名称对组件排序，保证客户端和服务器按同样的顺序序列化和反序列化组件</span></span><br><span class="line">        networkSerializables.Clear();</span><br><span class="line">        networkSerializables.AddRange(serializableArray);</span><br><span class="line">        networkSerializables.Sort((p1,p2)=&gt;p1.GetType().Name.CompareTo(p2.GetType().Name));</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> data = <span class="keyword">new</span> ReplicatedData</span><br><span class="line">        &#123;</span><br><span class="line">            entity = entity,</span><br><span class="line">            serializableArray = networkSerializables.ToArray()</span><br><span class="line">        &#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// entityid作为列表下标</span></span><br><span class="line">        m_replicatedData[entityId] = data;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 移除Entity</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Entity <span class="title">Unregister</span>(<span class="params"><span class="keyword">int</span> entityId</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">var</span> entity = m_replicatedData[entityId].entity;</span><br><span class="line">        GameDebug.Assert(entity != Entity.Null,<span class="string">"Unregister. ReplicatedData has has entity set"</span>);</span><br><span class="line"></span><br><span class="line">        m_replicatedData[entityId] = <span class="keyword">new</span> ReplicatedData();</span><br><span class="line">        <span class="keyword">return</span> entity;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 收到服务器快照数据，更新Entity状态</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ProcessEntityUpdate</span>(<span class="params"><span class="keyword">int</span> serverTick, <span class="keyword">int</span> id, <span class="keyword">ref</span> NetworkReader reader</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">var</span> data = m_replicatedData[id];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 记录最新的更新时间</span></span><br><span class="line">        GameDebug.Assert(data.lastServerUpdate &lt; serverTick, <span class="string">"Failed to apply snapshot. Wrong tick order. entityId:&#123;0&#125; snapshot tick:&#123;1&#125; last server tick:&#123;2&#125;"</span>, id, serverTick, data.lastServerUpdate);</span><br><span class="line">        data.lastServerUpdate = serverTick;</span><br><span class="line"></span><br><span class="line">        GameDebug.Assert(data.serializableArray != <span class="literal">null</span>, <span class="string">"Failed to apply snapshot. Serializablearray is null"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">var</span> entry <span class="keyword">in</span> data.serializableArray)</span><br><span class="line">            entry.Deserialize(<span class="keyword">ref</span> reader, <span class="keyword">this</span>, serverTick);</span><br><span class="line"></span><br><span class="line">        m_replicatedData[id] = data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 序列化某个Entity的快照数据</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">GenerateEntitySnapshot</span>(<span class="params"><span class="keyword">int</span> entityId, <span class="keyword">ref</span> NetworkWriter writer</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">var</span> data = m_replicatedData[entityId];</span><br><span class="line"></span><br><span class="line">        GameDebug.Assert(data.serializableArray != <span class="literal">null</span>, <span class="string">"Failed to generate snapshot. Serializablearray is null"</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">var</span> entry <span class="keyword">in</span> data.serializableArray)</span><br><span class="line">            entry.Serialize(<span class="keyword">ref</span> writer, <span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    List&lt;ReplicatedData&gt; m_replicatedData = <span class="keyword">new</span> List&lt;ReplicatedData&gt;(<span class="number">512</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这个项目确实有很大的学习价值，它不仅展示了一些高级主题，如ECS，网络同步，还有很多细节，整体上代码保持了高质量的水准，解决问题的思路很成熟，值得大家系统地学习。当然也存在着一些问题，比如没有使用JobSystem提高性能，ECS用法略显混乱，以及bug(已经提到<a href="https://forum.unity.com/threads/severe-performance-issue.590689/" target="_blank" rel="noopener">官方论坛</a>)等问题，不过这个项目仍在持续开发中，写这篇文章时已经发布了一个新版本，相信这些问题会随着后续的开发得到解决。目前网络上还没有介绍这个项目的文章，希望这篇文章能为那些想学习这个项目的人带来一些帮助。</p>
 
+      
     </div>
+
   </div>
-  
-    <div class="copy-right">
-      <div class="markdown-body">
-        <blockquote>
-        
-        
-          本文作者 : GODBMW <br>
-        
-        原文链接 : <a href="">http://yoursite.com/2018/12/30/FPSSample分析/</a><br>
-        版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
-        </blockquote>
-      </div>
-    </div>
-  
-  
-  
-    <div class="social-share" style="margin-top: -2rem" data-wechat-qrcode-title="<p>微信扫一扫</p>" data-wechat-qrcode-helper="<p>微信右上角, 扫一扫分享</p>" data-sites="qzone, qq, weibo, wechat, douban, google, facebook, twitter">
-  <span style="color: #6b7487; font-size: 1.4rem;">分享到: </span>
-</div>
-<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" async></script>
-  
-
-  
-    <div id="reward">
-  
-    <p id="reward-meta">知识 & 情怀 | 二者兼得</p>
-  
-  <button id="reward-btn">
-    
-    <span>投食</span>
-  </button>
-  <div id="reward-qrcode">
-    
-      <div class="reward-qrcode--container">
-        <img class="qrcode-img" src="/images/wechat.png" alt="微信扫一扫, 向我投食">
-        <p class="qrcode-meta">微信扫一扫, 向我投食</p>
-      </div>
-    
-      <div class="reward-qrcode--container">
-        <img class="qrcode-img" src="/images/alipay.png" alt="支付宝扫一扫, 向我投食">
-        <p class="qrcode-meta">支付宝扫一扫, 向我投食</p>
-      </div>
-    
-  </div>
-
-</div>
-
-<script>
-  (() => {
-    let button = document.querySelector('#reward-btn'),
-      qrcode = document.querySelector('#reward-qrcode'),
-      display = false;
-    
-    button.addEventListener('click', () => {
-      qrcode.style.display = display ? 'none' : 'block'
-      display = !display
-    }, false)
-  })()
-</script>
-  
 
   <div class="article-footer">
     <div class="article-meta pull-left">
-      <span>
-        
-          <i class="iconfont icon-06tags"></i>标签: 
-          
-          <span class="span--tag">
-            <a href="/tags/Unity/">
-              #Unity
-            </a>
-          </span>
-          
-          <span class="span--tag">
-            <a href="/tags/FPSSample/">
-              #FPSSample
-            </a>
-          </span>
-          
-        
-      </span>
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Unity/">Unity</a><a href="/tags/FPSSample/">FPSSample</a>
+    </span>
+    
+
     </div>
-    <div class="article-meta pull-right">
-    </div>
+
+    
   </div>
-</div>
+</article>
 
 
-  <aside id="sidebar">
-    <p id="sidebar-header"></p>
-    <ol id="sidebar-toc"></ol>
-  </aside>
-  <script async>setTimeout(generateToc, 10);</script>
+    </main>
 
-
-  <nav class="post-navigation">
-    
-      <div class="nav-pre">
-        <i class="iconfont icon-prev"></i>
-        上一篇:
-        <a href="/2018/12/29/hello-world/" target="_self">Hello World</a>
-      </div>
-    
-    
-  </nav>
-
-  
-    <a href="#comment" class="comment-anchor"></a>
-<div class="comment-title"><i class="iconfont icon-footprint"></i> 留下足迹 <i class="iconfont icon-footprint"></i></div>
-<div id="vcomments"></div>
-
-<script defer>
-  if( true ) {
-    let path = getRealPath()
-    new Valine({
-      el: "#vcomments",
-      appId: "Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz",
-      appKey: "WaR7nrzhliHj9aVwdQzkdlGd",
-      notify: false,
-      verify: false,
-      avatar: "robohash",
-      placeholder: "正确填写邮箱, 才能及时收到回复哦♪(^∇^*)",
-      path
-    });
-  }
-</script>
-   
-
-  
-    <script defer>
-const valineAPI = (() => {
-  try {
-    AV.init("Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz", "WaR7nrzhliHj9aVwdQzkdlGd");
-  } catch(error) {}
-  const isExist = (identity) => {
-    identity = identity || getRealPath();
-    let query = new AV.Query('Timer');
-    return new Promise((resolve, reject) => {
-      query.equalTo("identity", identity);
-      query.find().then(results => {
-        resolve(results.length > 0);
-      }, error => reject(error));
-    })
-  }
-
-  const _get = (identity) => {
-    let query = null;
-    if(identity && identity instanceof Array){
-      let querys = [];
-      for(let i = 0; i < identity.length; ++i) {
-        querys[i] = new AV.Query('Timer');
-        querys[i].equalTo('identity', identity[i]);
-      }
-      query = AV.Query.or.apply(null ,querys);
-    } else {
-      identity = identity || getRealPath();
-      query = new AV.Query("Timer");
-      query.equalTo("identity", identity);
-    }
-
-    return new Promise((resolve, reject) => {
-      query.find()
-      .then(results => resolve(results))
-      .catch(error => reject(error))
-    })
-  }
-
-  const create = (identity) => {
-    identity = identity || getRealPath();
-    return new Promise((resolve, reject) => {
-      let Todo = AV.Object.extend('Timer');
-      let todo = new Todo();
-      todo.set("times", 1);
-      todo.set("identity", identity);
-      todo.save().then(res => resolve(true), error => reject(error));
-    })
-  }
-
-  const update = (identity) => {
-    identity = identity || getRealPath();
-    return new Promise((resolve, reject) => {
-      let query = new AV.Query('Timer');
-      query.equalTo("identity", identity);
-      query.find().then(todos => {
-        todos.forEach(todo => {
-          todo.set("times", todo.attributes.times + 1);
-        });
-        return AV.Object.saveAll(todos);
-      }).then(todos => resolve(true), error => reject(error));
-    })
-  }
-
-  return {
-    isExist,
-    _get,
-    update,
-    create
-  }
-})()
-
-const calcAndWriteTimes = () => {
-  let isPost = true;
-
-  let timerAllDOM = document.querySelectorAll(".article-timer");
-
-  if(isPost) {
-    let identity = timerAllDOM[0].getAttribute("data-identity");
-    valineAPI.isExist(identity)
-    .then(exist => {
-      if(exist) {
-        return valineAPI.update(identity);
-      }
-      return new Promise(resolve => resolve(true));
-    })
-    .then( succuess => valineAPI._get(identity))
-    .then( result => timerAllDOM[0].innerText = result[0].attributes.times)
-    .catch(error => console.log(error.message))
-    return ;
-  }
-
-  let timerDOMCache = {};
-
-  for(let timerDOM of timerAllDOM) {
-    let identity = timerDOM.getAttribute("data-identity");
-    if(timerDOMCache.hasOwnProperty(identity)){
-      timerDOMCache[identity].dom.push(timerDOM);
-    }else{
-      timerDOMCache[identity] = {
-        dom: [timerDOM],
-        times: undefined
-      };
-    }
-  }
-
-  let identities = Object.keys(timerDOMCache);
-  valineAPI._get(identities).then(results => {
-    for(let result of results) {
-      let {identity, times} = result.attributes;
-      timerDOMCache[identity].times = times;
-      timerDOMCache[identity].dom.map(item => item.innerText = times);
-    }
-    for(let identity of identities) {
-      if(timerDOMCache[identity].times){
-        continue;
-      }
-      timerDOMCache[identity].dom.map(item => item.innerText = 1);
-      valineAPI.create(identity);
-    }
-  }).catch(error => console.log(error.message))
-}
-
-if(true){
-  calcAndWriteTimes();
-}
-</script>
-   
-
-</div>
-
-
-      <footer>
+    <footer class="site-footer">
   <p class="site-info">
-    博客已萌萌哒运行<span id="time-to-now"></span><span class="my-face">(●'◡'●)ﾉ♥</span>
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
     <br>
-    Theme - <a href="https://github.com/dongyuanxin/theme-bmw">BMW</a> | Made With 💗 | Powered by <a href="https://godbmw.com/">GodBMW</a>
-    <br>
+    
+    &copy; 2018 John Doe
     
   </p>
 </footer>
-
-
-
-<script>
-const timeToNowDOM = document.querySelector("#time-to-now");
-const startTimestamp = new Date(2018, 1, 10).getTime();
-
-const updateTimeStr = () => {
-  let offset = parseInt(
-      (new Date().getTime() - startTimestamp) / 1000,
-      10
-    ),
-    day = Math.floor(offset / 86400),
-    hour = Math.floor((offset % 86400) / 3600),
-    minute = Math.floor(((offset % 86400) % 3600) / 60),
-    second = Math.floor(((offset % 86400) % 3600) % 60);
-  timeToNowDOM.innerHTML =
-    day + "天" + hour + "小时" + minute + "分钟" + second + "秒";
-  setTimeout(updateTimeStr, 500);
-}
-
-setTimeout(updateTimeStr, 500);
-</script>
-
-
-      <div class="back-to-top hidden">
-  <span>
-    <i class="iconfont icon-60"></i><span></span>%
-  </span>
+    
+  </div>
 </div>
-
-<script>
-const updateIconToTop = percent => {
-  let dom = document.querySelector(".back-to-top span span");
-  dom.innerText = percent;
-  if(percent < 1) {
-    document.querySelector(".back-to-top").className = "back-to-top hidden";
-  } else {
-    document.querySelector(".back-to-top").className = "back-to-top";
-  }
-}
-
-const handleScoll = () => {
-  let isRunning = false;
-  return () => {
-    if (isRunning) return;
-    isRunning = true;
-    window.requestAnimationFrame(timestamp => {
-      let scrollTop =
-          document.documentElement.scrollTop || document.body.scrollTop,
-        scrollHeight =
-          document.documentElement.scrollHeight ||
-          document.body.scrollHeight,
-        clientHeight =
-          document.documentElement.clientHeight ||
-          document.body.clientHeight;
-      isRunning = false;
-      if (scrollTop <= 1) {
-        updateIconToTop(0);
-        return;
-      }
-      if (scrollTop + clientHeight >= scrollHeight) {
-        updateIconToTop(100);
-      } else {
-        updateIconToTop(parseInt(
-          100 * scrollTop / (scrollHeight - clientHeight),
-          10
-        ));
-      }
-    });
-  };
-}
-
-const backToTop = () => {
-  let scrollTop =
-      document.documentElement.scrollTop || document.body.scrollTop,
-    delay = 10,
-    time = 200;
-  if (scrollTop <= 20) {
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-    return;
-  }
-  let step = Math.ceil(scrollTop * delay / time);
-  let timer = setInterval(() => {
-    scrollTop =
-      document.documentElement.scrollTop || document.body.scrollTop;
-    if (scrollTop - step <= 0) {
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-      clearInterval(timer);
-    } else {
-      document.documentElement.scrollTop = scrollTop - step;
-      document.body.scrollTop = scrollTop - step;
-    }
-  }, delay);
-}
-
-document.addEventListener("scroll", handleScoll(), false);
-
-document.querySelector(".back-to-top").addEventListener("click", backToTop, false);
-
-</script>
-
-    </div>
-
-    
-      <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
-<script>
-  (() => {
-    const mathjaxConfig = {
-      showProcessingMessages: false, //关闭js加载过程信息
-      messageStyle: "none", //不显示信息
-      jax: ["input/TeX", "output/HTML-CSS"],
-      tex2jax: {
-        inlineMath: [["$", "$"], ["\\(", "\\)"]], //行内公式选择符
-        displayMath: [["$$", "$$"], ["\\[", "\\]"]], //段内公式选择符
-        skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"] //避开某些标签
-      },
-      "HTML-CSS": {
-        availableFonts: ["STIX", "TeX"], //可选字体
-        showMathMenu: false //关闭右击菜单显示
-      }
-    }
-
-    let mathjaxInterval = setInterval(() => {
-      if(!window.MathJax){
-        return;
-      }
-      window.MathJax.Hub.Config(mathjaxConfig)
-      window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('app')])
-
-      clearInterval(mathjaxInterval)
-    }, 10)    
-  })()
-</script>
-    
-
-    <script src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script>
-<script async>
-  let fancyTimer = setInterval(function(){
-    if(!window.$){
-      return;
-    }
-    $(document).ready(function() {
-      $(".post img").each(function () {
-        if($(this).parent().get(0).tagName.toLowerCase() === "a") {
-          return;
-        }
-        // $(this).attr("data-fancybox", "gallery"); // if you add 'data-fancybox', img will display after showed
-        var element = document.createElement("a");
-        $(element).attr("data-fancybox", "gallery");
-        $(element).attr("href", $(this).attr("src"));
-        $(this).wrap(element);
-      });
-      
-      clearInterval(fancyTimer);
-    });
-  }, 10);
-</script>
-
-    
-  </body>
-
+</body>
 </html>
