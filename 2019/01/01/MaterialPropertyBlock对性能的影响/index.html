@@ -11,7 +11,7 @@
 
     <title>
         
-        tags - undefined
+        MaterialPropertyBlock对性能的影响 - undefined
         
     </title>
 
@@ -59,7 +59,7 @@
                     <span>HOME</span>
                 </a>
             </li>
-            <li class="active">
+            <li>
                 <a href="/tags">
                     <i class="iconfont icon-biaoqian1"></i>
                     <span>TAGS</span>
@@ -88,6 +88,10 @@
         </ul>
     </div>
     
+        <div id="toc" class="toc-article">
+    
+</div>
+    
 </div>
 
 
@@ -110,119 +114,48 @@
     
     <div class="index-middle">
         <!-- Main Content -->
-        <div id="tag_cloud" class="tags">
-    
-    <a href="#Unity" title="Unity" rel="2">Unity</a>
-    
-    <a href="#Material" title="Material" rel="1">Material</a>
-    
-    <a href="#MaterialPropertyBlock" title="MaterialPropertyBlock" rel="1">MaterialPropertyBlock</a>
-    
-    <a href="#FPSSample" title="FPSSample" rel="1">FPSSample</a>
-    
-</div>
-
-<!-- 标签列表 -->
+        
 
 
-<div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="Unity">
-                    <span class="tag-text">Unity</span>
-                </span>
-    
-    <!-- <li class="listing-item">
-    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-    </li> -->
-    <div class="post-preview">
-        <a href="/2019/01/01/MaterialPropertyBlock对性能的影响/">
-            <h2 class="post-title">
-                MaterialPropertyBlock对性能的影响
-            </h2>
-            
-        </a>
-        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+<div class="post-container">
+    <div class="post-title">
+        MaterialPropertyBlock对性能的影响
     </div>
-    
-    <!-- <li class="listing-item">
-    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-    </li> -->
-    <div class="post-preview">
-        <a href="/2018/12/30/FPSSample分析/">
-            <h2 class="post-title">
-                FPSSample分析
-            </h2>
-            
-        </a>
-        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-    </div>
-    
-</div>
 
-<div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="Material">
-                    <span class="tag-text">Material</span>
-                </span>
-    
-    <!-- <li class="listing-item">
-    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-    </li> -->
-    <div class="post-preview">
-        <a href="/2019/01/01/MaterialPropertyBlock对性能的影响/">
-            <h2 class="post-title">
-                MaterialPropertyBlock对性能的影响
-            </h2>
-            
-        </a>
-        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-    </div>
-    
-</div>
+    <div class="post-meta">
+        <span class="attr">Post：<span>2019-01-01 15:38:29</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#Unity" title="Unity">Unity</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Material" title="Material">Material</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#MaterialPropertyBlock" title="MaterialPropertyBlock">MaterialPropertyBlock</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
 
-<div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="MaterialPropertyBlock">
-                    <span class="tag-text">MaterialPropertyBlock</span>
-                </span>
-    
-    <!-- <li class="listing-item">
-    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-    </li> -->
-    <div class="post-preview">
-        <a href="/2019/01/01/MaterialPropertyBlock对性能的影响/">
-            <h2 class="post-title">
-                MaterialPropertyBlock对性能的影响
-            </h2>
-            
-        </a>
-        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
     </div>
-    
-</div>
+    <div class="post-content ">
+        <p>对使用相同材质的物体设置不同的材质属性是一个常见的需求，可以使用<code>Render.material</code>生成一个新的材质并设置属性，这需要更多内存，并且会破坏可能的batching，所以要尽量避免使用。另一种方法是用<code>Render.SetPropertyBlock(MaterialPropertyBlock properties)</code>设置属性，接下来就分析这种做法对batching的影响。</p>
 
-<div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="FPSSample">
-                    <span class="tag-text">FPSSample</span>
-                </span>
-    
-    <!-- <li class="listing-item">
-    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-    </li> -->
-    <div class="post-preview">
-        <a href="/2018/12/30/FPSSample分析/">
-            <h2 class="post-title">
-                FPSSample分析
-            </h2>
-            
-        </a>
-        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
     </div>
-    
 </div>
-
     </div>
 </div>
 
@@ -261,7 +194,7 @@
     // We expose some of the variables needed by the front end
     window.hexo_search_path = "search.json"
     window.hexo_root = "/"
-    window.isPost = false
+    window.isPost = true
 </script>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
