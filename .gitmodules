@@ -1,0 +1,6 @@
+[submodule "themes/fuji"]
+	path = themes/fuji
+	url = https://github.com/dsrkafuu/hugo-theme-fuji.git
+[submodule "themes/cupper-hugo-theme"]
+	path = themes/cupper-hugo-theme
+	url = https://github.com/zwbetz-gh/cupper-hugo-theme.git
