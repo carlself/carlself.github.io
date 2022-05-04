@@ -56,20 +56,20 @@ public class SetMaterialProperty : MonoBehaviour, IPointerDownHandler {
 ```
 
 运行测试场景，并打开Frame Debugger，结果如下:
-![image](/static/images/MaterialPropertyBlock/screenshot_1.png)
-![image](/static/images/MaterialPropertyBlock/screenshot_2.png)
+![image](images/screenshot_1.png)
+![image](images/screenshot_2.png)
 
 Frame Debugger中选中的部分就是渲染4个cube所需的draw call，可以看出unity一次渲染这四个cube。然后通过MaterialPropertyBlock设置其中一个cube的_Color属性，再次观察Frame Debugger，结果如下：
-![image](/static/images/MaterialPropertyBlock/screenshot_3.png)
+![image](images/screenshot_3.png)
 
 可以看出Unity需要两次draw call来渲染这四个cube，一次动态批处理，一次是设置了_Color属性的cube。红框部分说明了设置不同的MaterialPropertyBlock会破坏batching，这句话隐含的意思是使用相同的属性cube会合并一起渲染，接下来测试一下这种情况：
-![image](/static/images/MaterialPropertyBlock/screenshot_4.png)
-![image](/static/images/MaterialPropertyBlock/screenshot_5.png)
+![image](images/screenshot_4.png)
+![image](images/screenshot_5.png)
 
 可以看出使用了相同属性的cube被动态批处理了，也就说通过`MaterialPropertyBlock`设置的属性相同时不会破坏批处理，对于不同属性相同mesh的物体可以使用[GPU Instancing](https://docs.unity3d.com/Manual/GPUInstancing.html)减少draw call。
 
 [这篇博客](https://thomasmountainborn.com/2016/05/25/materialpropertyblocks/) 说用`MaterialPropertyBlock`设置的材质属性需要在shader中添加[PerRendererData]，否则Unity内部会创建新的材质。根据我的测试，不管有没有[PerRenderData]都不会创建新的材质
-![image](/static/images/MaterialPropertyBlock/screenshot_6.png)
+![image](images/screenshot_6.png)
 
 根据[论坛](https://forum.unity.com/threads/learn-how-to-use-materialpropertyblocks-and-perrendererdata-for-great-performance-gains.406638/)里官方人员的说法[PerRenderData]并没有实际的作用，只为了说明这个属性是通过MaterialPropertyBlock设置的。
 

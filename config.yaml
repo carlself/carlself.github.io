@@ -1,88 +1,164 @@
-baseURL: https://example.com
-languageCode: en-us
-defaultContentLanguage: en
-title: Cupper
-theme: cupper-hugo-theme
-googleAnalytics: UA-123456789-1
-disqusShortname: yourdiscussshortname
-enableGitInfo: true
+baseURL: "https://carlself.github.io/" # if your site is in 'https', then make sure your base url isn't written using 'http' otherwise your sitemap would contain http (as opposeed to https) URLs. This would affect Google indexing of your URLs.
+title: 老王的个人博客
+paginate: 5
+theme: PaperMod
 
-taxonomies:
-  tag: tags
+enableInlineShortcodes: true
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+enableEmoji: true
+pygmentsUseClasses: true
+# googleAnalytics: UA-123-45
 
-permalinks:
-  post: /:filename/
+minify:
+    disableXML: true
+    # minifyOutput: true
 
-imaging:
-  quality: 99
+languages:
+    en:
+        languageName: "English"
+        weight: 1
+        taxonomies:
+          category: categories
+          tag: tags
+          series: series
+        menu:
+            main:
+                - name: Archive
+                  url: archives
+                  weight: 5
+                - name: Search
+                  url: search/
+                  weight: 10
+                - name: Tags
+                  url: tags/
+                  weight: 10
+                - name: Categories
+                  url: categories/
+                  weight: 10
+
+
+outputs:
+    home:
+        - HTML
+        - RSS
+        - JSON
 
 params:
-  description: An accessibility-friendly Hugo theme, ported from the [original Cupper](https://github.com/ThePacielloGroup/cupper) project.
-  homeMetaContent: An accessibility-friendly Hugo theme, ported from the original Cupper project.
-  footer: Made with [Hugo](https://gohugo.io/). Themed by [Cupper](https://github.com/zwbetz-gh/cupper-hugo-theme). Deployed to [Netlify](https://www.netlify.com/).
-  # For more date formats see https://gohugo.io/functions/format/
-  dateFormat: Jan 2, 2006
-  codePenUser: someUser
-  katex: true
-  hideHeaderLinks: false
-  search: true
-  showThemeSwitcher: true
-  defaultDarkTheme: false
-  moveFooterToHeader: false
-  # navTitleText: Cupper Theme
-  logoAlt: An alternative text description of the logo
-  customCss:
-    - css/custom_01.css
-    - css/custom_02.css
-  customJs:
-    - js/custom_01.js
-    - js/custom_02.js
+    env: production # to enable google analytics, opengraph, twitter-cards and schema.
+    description: "Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"
+    author: 老王 
+    # author: ["Me", "You"] # multiple authors
 
-menu:
-  nav:
-    - name: Home
-      url: /
-      weight: 1
-    - name: Blog
-      url: /post/
-      weight: 2
-    - name: Tags
-      url: /tags/
-      weight: 3
-    - name: About
-      url: /about/
-      weight: 4
-    - name: RSS
-      url: /index.xml
-      weight: 5
+    defaultTheme: auto
+    # disableThemeToggle: true
+    ShowShareButtons: true
+    ShowReadingTime: true
+    # disableSpecial1stPost: true
+    displayFullLangName: true
+    ShowPostNavLinks: true
+    ShowBreadCrumbs: true
+    ShowCodeCopyButtons: true
+    ShowRssButtonInSectionTermList: true
+    ShowToc: true
+    # comments: false
+    images: ["papermod-cover.png"]
+
+    profileMode:
+        enabled: false
+        title: PaperMod
+        imageUrl: "#"
+        imageTitle: my image
+        # imageWidth: 120
+        # imageHeight: 120
+        buttons:
+            - name: Archives
+              url: archives
+            - name: Tags
+              url: tags
+
+    homeInfoParams:
+        Title: "About"
+        Content: >
+            记录和分享
+
+    # socialIcons:
+    #     - name: github
+    #       url: "https://github.com/adityatelange/hugo-PaperMod"
+    #     - name: KoFi
+    #       url: "https://ko-fi.com/adityatelange"
+    #     - name: RsS
+    #       url: "index.xml"
+
+    editPost:
+        URL: "https://github.com/adityatelange/hugo-PaperMod/tree/exampleSite/content"
+        Text: "Suggest Changes" # edit text
+        appendFilePath: true # to append file path to Edit link
+
+    # label:
+    #     text: "Home"
+    #     icon: icon.png
+    #     iconHeight: 35
+
+    # analytics:
+    #     google:
+    #         SiteVerificationTag: "XYZabc"
+
+    # assets:
+    #     favicon: "<link / abs url>"
+    #     favicon16x16: "<link / abs url>"
+    #     favicon32x32: "<link / abs url>"
+    #     apple_touch_icon: "<link / abs url>"
+    #     safari_pinned_tab: "<link / abs url>"
+
+    # cover:
+    #     hidden: true # hide everywhere but not in structured data
+    #     hiddenInList: true # hide on list pages and home
+    #     hiddenInSingle: true # hide on single page
+
+    # fuseOpts:
+    #     isCaseSensitive: false
+    #     shouldSort: true
+    #     location: 0
+    #     distance: 1000
+    #     threshold: 0.4
+    #     minMatchCharLength: 0
+    #     keys: ["title", "permalink", "summary", "content"]
 
 markup:
-  defaultMarkdownHandler: goldmark
-  goldmark:
-    extensions:
-      definitionList: true
-      footnote: true
-      linkify: true
-      strikethrough: true
-      table: true
-      taskList: true
-      typographer: true
-    parser:
-      attribute: true
-      autoHeadingID: true
-    renderer:
-      hardWraps: false
-      unsafe: true
-      xHTML: false
-  highlight:
-    codeFences: false
-    hl_Lines: ""
-    lineNoStart: 1
-    lineNos: false
-    lineNumbersInTable: true
-    noClasses: true
-    style: monokai
-    tabWidth: 4
-  tableOfContents:
-    endLevel: 6
-    startLevel: 2
+    goldmark:
+        renderer:
+            unsafe: true
+#     highlight:
+#         # anchorLineNos: true
+#         codeFences: true
+#         guessSyntax: true
+#         lineNos: true
+#         # noClasses: false
+#         style: monokai
+
+privacy:
+    vimeo:
+        disabled: false
+        simple: true
+
+    twitter:
+        disabled: false
+        enableDNT: true
+        simple: true
+
+    instagram:
+        disabled: false
+        simple: true
+
+    youtube:
+        disabled: false
+        privacyEnhanced: true
+
+services:
+    instagram:
+        disableInlineCSS: true
+    twitter:
+        disableInlineCSS: true

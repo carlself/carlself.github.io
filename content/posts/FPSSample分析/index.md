@@ -1,9 +1,7 @@
 ---
-title: "Content Placeholder"
-_build:
-  render: never
-  list: never
-  publishResources: false
+title: "FPSSample分析"
+date: 2022-05-03T23:40:37+08:00
+draft: true
 ---
 在FPSSample项目之前Unity官方出的示例都只是展示某一项技术，没有真正完整的大型项目。要做出真正易用的引擎，引擎开发商要使用自己的引擎做实际的项目，然后根据开发体验改进引擎，这样才会不断提高引擎的易用性，厨师要吃自己做的菜才能成为好厨师。很高兴看到Unity官方能做出FPSSample这样的项目，这代表了Unity态度的转变，事情在往好的方向发展。
 
@@ -89,9 +87,9 @@ Assetbundle的管理是令人非常头疼的，按照官方推荐的[最佳实�
 
 下图显示ScriptableObject如何管理资源的
 
-![image](http://carlself.github.io/static/images/FPSSample/client_assets.png)
-![image](http://carlself.github.io/static/images/FPSSample/character.jpg)
-![image](http://carlself.github.io/static/images/FPSSample/char_robot.JPG)
+![image](images/client_assets.png)
+![image](images/character.jpg)
+![image](images/char_robot.JPG)
 
 相关代码
 ```
@@ -123,7 +121,7 @@ public class WeakAssetReference
 
 UDP数据包在网络传输中会重复，乱序和丢失，通过给每个发送的数据包加序列号Seq，接收方就可以识别出重复和乱序问题并作出相应处理。丢包则需要接收方通知发送方数据包的接收情况，这样发送方可以根据情况重发。接收方在下次返回的数据包中增加自己所收到的最大数据包序列号和表示最近16个数据包接收状况的掩码，这样发送方就可以知道自己发出的过去16个数据包的接收情况。
 
-![image](http://carlself.github.io/static/images/FPSSample/图1.jpg)图1
+![image](images/图1.jpg)图1
 
 Out Seq表示当前数据包序列号，In Seq表示本地收到数据包的最大序列号，Ack Mask表示之前收到的16个数据包的接收情况
 
@@ -242,17 +240,17 @@ public class NetworkSchema
 
     [SequnceBuffer](https://github.com/Unity-Technologies/FPSSample/blob/fa73e3942eaf49a24d2c40f85cd0caa404c91cff/Assets/Scripts/Networking/SequenceBuffer.cs#L64)具有对象池的功能，可以由序列号获取对象。内部实现是两个数组，一个记录序列号，一个记录对应的元素。下图说明了SequenceBuffer的工作原理。
 
-    ![image](http://carlself.github.io/static/images/FPSSample/图2.jpg)图2
+    ![image](images/图2.jpg)图2
 
 * 消息可靠性
 
     [NetworkConnection](https://github.com/Unity-Technologies/FPSSample/blob/fa73e3942eaf49a24d2c40f85cd0caa404c91cff/Assets/Scripts/Networking/NetworkConnection.cs#L62)保存了当前链接收到数据包的最大序列号(inSequence)以及对应的确认掩码(inSequenceAckMask)，发出的最大数据包序列(outSequence)以及对应的确认掩码(outSequenceAck)。当收到新的数据包时，读取数据包头部中的序列号(inSequenceNew)，对方确认过的最大序列号(outSequenceAckNew)以及掩码(outSequenceAckMaskNew)。如果inSequenceNew大于inSequence，则把inSequenceAckMask左移(inSequenceNew-inSequence)位，也就是说这些掩码位对应的数据包丢失了。如果outSequenceAckNew大于outSequenceAck，则检查outSequenceAckMask的最后(outSequenceAckNew-outSequenceAck)位，如果某一个位是0，则认为这个掩码对应的数据包已经丢失，就重新发送那些要求可靠性的消息。这里只描述了关键情况，其它情况请看下面的代码注释。
 
-    ![image](http://carlself.github.io/static/images/FPSSample/图3.jpg)图3
+    ![image](images/图3.jpg)图3
 
     上图表示收到一个新的序列号为53的数据包，需要把inSequenceAckMask左移(53-50=3)位，这时掩码的35,36,37位被丢弃，而37号数据还未收到，就认为这个数据包已经丢失。
 
-    ![image](http://carlself.github.io/static/images/FPSSample/图4.jpg)图4
+    ![image](images/图4.jpg)图4
 
     上图表示对方确认过的最大序列号是83，找出outSequenceAckMask的最后(83-80=3)位中未被确认过的66号数据包，重新发送其对应的可靠消息。更新outSequenceAckMask的值为outSequenceAckMaskNew，outSequence的值为outSequenceAckNew。
 
@@ -471,13 +469,13 @@ public class NetworkSchema
 
 客户端有两个重要的时间([GameTime]((https://github.com/Unity-Technologies/FPSSample/blob/master/Assets/Scripts/Game/Main/Game.cs#L16)))，渲染时间(RenderTime)和预测时间(PredictedTime),RenderTime用于插值计算出客户端要渲染的状态，PredictedTime表示客户端预测一个指令到达服务器时服务器的当前时间。客户端的Update函数驱动这两个时间向前走，Update会根据收到的最新的服务器时间(ServerTime)和网络波动来调整RenderTime和PredictedTime，最新的快照对应的服务器时间决定RenderTime，本地预测的服务器时间决定PredictedTime。同时有个时间缩放系数来达到时间变慢和变快的效果，当发送给服务器的指令不足时则加速时间从而使客户端更快产生指令，反之减慢时间。客户端时间线示意图如下：
 
-![image](http://carlself.github.io/static/images/FPSSample/图6.jpg)图5
+![image](images/图6.jpg)图5
 
 上图中红色的时间点表示已经收到了快照数据，ServerTime表示最新的快照数据的服务器时间。WorldTime是游戏时间，可以被赋予RenderTime，PredictedTime或者ServerTime，然后执行插值(interpolation)，预测(prediction)或回滚(rollback)的代码。
 
 服务器端的时间只有一个时间WorldTime，上面提到的客户端时间都和这个时间有直接或者间接的关系，这是游戏世界的主时间。服务器每一步会从收到的指令队列中取出当前的指令并作用于游戏逻辑，所以输入指令到达服务器时要尽量保证指令时间不落后于服务器时间，否则服务器会使用旧的指令，这就要求客户端在指令发送时预测指令在服务器上将于何时执行，在发送的指令里携带这个时间。客户端产生的指令会被存储一段时间，以便之后的预测用到。
 
-![image](http://carlself.github.io/static/images/FPSSample/图7.jpg)图6
+![image](images/图7.jpg)图6
 
 由上图可得 CommandTime = serverTime + (timeSinceSnapShot + RTT) * tickRate
 
