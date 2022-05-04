@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>老王的个人博客</title>
-    <link>https://carlself.github.io/</link>
-    <description>Recent content on 老王的个人博客</description>
+    <title>Posts on 老王的个人博客</title>
+    <link>https://carlself.github.io/posts/</link>
+    <description>Recent content in Posts on 老王的个人博客</description>
     <image>
       <url>https://carlself.github.io/papermod-cover.png</url>
       <link>https://carlself.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 03 May 2022 23:40:37 +0800</lastBuildDate><atom:link href="https://carlself.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 May 2022 23:40:37 +0800</lastBuildDate><atom:link href="https://carlself.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>FPSSample分析</title>
       <link>https://carlself.github.io/posts/fpssample%E5%88%86%E6%9E%90/</link>
@@ -32,8 +32,6 @@ FPSSample的Github地址是https://github.com/Unity-Technologies/FPSSample，这
 首先建立一个测试工程，新建一个场景，场景中添加4个默认cube，为每个cube挂载下面的脚本
 using System.Collections; using System.Collections.Generic; using UnityEngine; using UnityEngine.EventSystems; public class SetMaterialProperty : MonoBehaviour, IPointerDownHandler { int index; Renderer renderer; MaterialPropertyBlock propertyBlock; void Awake() { renderer = GetComponent&amp;lt;Renderer&amp;gt; (); propertyBlock = new MaterialPropertyBlock (); renderer.GetPropertyBlock (propertyBlock); } public void NextColorProperty() { switch (index) { case 0: propertyBlock.SetColor (&amp;#34;_Color&amp;#34;, Color.red); break; case 1: propertyBlock.SetColor (&amp;#34;_Color&amp;#34;, Color.green); break; case 2: propertyBlock.SetColor (&amp;#34;_Color&amp;#34;, Color.yellow); break; } renderer.SetPropertyBlock (propertyBlock); index = ++index%3; } #region IPointerDownHandler implementation public void OnPointerDown (PointerEventData eventData) { NextColorProperty (); } #endregion } 运行测试场景，并打开Frame Debugger，结果如下: Frame Debugger中选中的部分就是渲染4个cube所需的draw call，可以看出unity一次渲染这四个cube。然后通过MaterialPropertyBlock设置其中一个cube的_Color属性，再次观察Frame Debugger，结果如下： 可以看出Unity需要两次draw call来渲染这四个cube，一次动态批处理，一次是设置了_Color属性的cube。红框部分说明了设置不同的MaterialPropertyBlock会破坏batching，这句话隐含的意思是使用相同的属性cube会合并一起渲染，接下来测试一下这种情况： 可以看出使用了相同属性的cube被动态批处理了，也就说通过MaterialPropertyBlock设置的属性相同时不会破坏批处理，对于不同属性相同mesh的物体可以使用GPU Instancing减少draw call。</description>
     </item>
-    
-    
     
   </channel>
 </rss>
