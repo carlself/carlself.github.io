@@ -1,7 +1,7 @@
 ---
 title: "MaterialPropertyBlock对性能的影响"
 date: 2022-05-03T23:40:37+08:00
-draft: true
+draft: false
 ---
 对使用相同材质的物体设置不同的材质属性是一个常见的需求，可以使用`Render.material`生成一个新的材质并设置属性，这需要更多内存，并且会破坏可能的batching，所以要尽量避免使用。另一种方法是用`Render.SetPropertyBlock(MaterialPropertyBlock properties)`设置属性，接下来就分析这种做法对batching的影响。
 
